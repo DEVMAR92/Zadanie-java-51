@@ -38,20 +38,20 @@ public class Procesor extends Part implements Overclocking {
     }
 
     @Override
-    public void overclockUp(int speedUp) throws TemperatureToHigh{
+    public void overclockUp(int speedUp) throws TemperatureToHigh {
 
-            timing += speedUp;
-            temp += speedUp / 10;
-            if(temp > 100) {
-                throw new TemperatureToHigh();
-            }
+        timing += speedUp;
+        temp += speedUp / 10;
+        if (temp > 100) {
+            throw new TemperatureToHigh();
+        }
     }
 
     @Override
-    public void overclockDown(int speedDown) throws BelowTheInitialState{
+    public void overclockDown(int speedDown) throws BelowTheInitialState {
         timing -= speedDown;
         temp -= speedDown / 10;
-        if(timing < STARTING_TIMING){
+        if (timing < STARTING_TIMING) {
             throw new BelowTheInitialState();
         }
     }

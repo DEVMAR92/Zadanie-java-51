@@ -37,6 +37,6 @@ public class Computer {
 
     @Override
     public String toString() {
-        return "Komputer PC podzespoły::\nProcesor:" + procesor.toString()+ "\nPamięć RAM:" + memoryRAM.toString()+ "\nDysk Twardy:" + hardDrive.toString();
+        return "Komputer PC podzespoły::\nProcesor:" + procesor.toString() + "\nPamięć RAM:" + memoryRAM.toString() + "\nDysk Twardy:" + hardDrive.toString();
     }
 }

@@ -2,7 +2,6 @@ package app;
 
 import data.*;
 
-import java.util.zip.CheckedOutputStream;
 
 public class Test {
     public static void main(String[] args) {
@@ -11,9 +10,9 @@ public class Test {
         Part memoryRAM1 = new MemoryRAM("XPG", "ADATA", "dqwe233rfwes", 2000, 4096);
         Part hardDrive1 = new HardDrive("DKSHP4", "StarTech", "7738757234", 1024);
 
-        Computer computer = new Computer((Procesor)procesor1, (MemoryRAM)memoryRAM1, (HardDrive)hardDrive1);
+        Computer computer = new Computer((Procesor) procesor1, (MemoryRAM) memoryRAM1, (HardDrive) hardDrive1);
 
-        String computerInfo =  computer.toString();
+        String computerInfo = computer.toString();
 
 
         //INFORMACJE O KOMPUTERZE
@@ -26,8 +25,8 @@ public class Test {
 
         //PODKRĘCANIE PROCESORA I RAMU o 200 MHz:
 
-         computer.getProcesor().overclockUp(200);
-         computer.getMemoryRAM().overclockUp(200);
+        computer.getProcesor().overclockUp(200);
+        computer.getMemoryRAM().overclockUp(200);
 
         System.out.println("Temp Procesora: " + computer.getProcesor().getTemp() +
                 ", Taktowanie: " + computer.getProcesor().getTiming());

@@ -3,7 +3,7 @@ package data;
 public class MemoryRAM extends Part implements Overclocking {
     private final double STARTING_TIMING;
     private double timing;
-    private  int memoryAmount;
+    private int memoryAmount;
     private double temp;
 
     public MemoryRAM(String model, String producer, String serialNumber, double timing, int memoryAmount) {
@@ -39,24 +39,25 @@ public class MemoryRAM extends Part implements Overclocking {
     }
 
 
-
     @Override
     public String toString() {
         return super.toString() + ", Taktowanie(MHz): " + STARTING_TIMING + ", Ilość Pamięci(MB): " + memoryAmount;
     }
+
     @Override
-    public void overclockUp(int speedUp) throws TemperatureToHigh{
+    public void overclockUp(int speedUp) throws TemperatureToHigh {
         timing += speedUp;
         temp += speedUp / 15;
-        if(temp > 100) {
+        if (temp > 100) {
             throw new TemperatureToHigh();
         }
     }
+
     @Override
-    public void overclockDown(int speedDown) throws BelowTheInitialState{
+    public void overclockDown(int speedDown) throws BelowTheInitialState {
         timing -= speedDown;
         temp -= speedDown / 15;
-        if(timing < STARTING_TIMING){
+        if (timing < STARTING_TIMING) {
             throw new BelowTheInitialState();
         }
 
