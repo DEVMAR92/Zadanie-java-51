@@ -12,37 +12,42 @@ public class Test {
 
         Computer computer = new Computer((Procesor) procesor1, (MemoryRAM) memoryRAM1, (HardDrive) hardDrive1);
 
-        String computerInfo = computer.toString();
-
-
         //INFORMACJE O KOMPUTERZE
-        System.out.println(computerInfo);
-        System.out.println("Temp Procesora " + computer.getProcesor().getTemp() +
-                ", Taktowanie" + computer.getProcesor().getTiming());
-        System.out.println("Temp Pamięci RAM " + computer.getMemoryRAM().getTemp() +
-                ", Taktowanie" + computer.getMemoryRAM().getTiming() + "\n");
 
+        System.out.println(computer + "\n");
+        partsInfo(computer);
+        try {
+            //PODKRĘCANIE PROCESORA I RAMU o 200 MHz:
 
-        //PODKRĘCANIE PROCESORA I RAMU o 200 MHz:
+            computer.getProcesor().overclockUp(200);
+            computer.getMemoryRAM().overclockUp(200);
 
-        computer.getProcesor().overclockUp(200);
-        computer.getMemoryRAM().overclockUp(200);
+            partsInfo(computer);
 
+            //POWRÓT DO STANU POCZĄTKOWEGO
+
+            computer.getProcesor().overclockDown(200);
+            computer.getMemoryRAM().overclockDown(200);
+
+            partsInfo(computer);
+
+            //PRÓBA PODKRĘCENIA POWYŻEJ 100 STOPNI
+
+            computer.getProcesor().overclockUp(100);
+            computer.getMemoryRAM().overclockUp(500);
+
+            partsInfo(computer);
+        } catch (TemperatureToHigh ex) {
+            System.err.println("TEMPERATURA ZA WYSOKA");
+        } catch (BelowTheInitialState ex) {
+            System.err.println("PROBA OBNIZENIA WYDAJNOSCI PONIZEJ DOMYSLNEJ");
+        }
+    }
+
+    static void partsInfo(Computer computer) {
         System.out.println("Temp Procesora: " + computer.getProcesor().getTemp() +
                 ", Taktowanie: " + computer.getProcesor().getTiming());
-        System.out.println("Temp Pamięci RAM: " + computer.getMemoryRAM().getTemp() +
+        System.out.println("Temp Pamieci RAM: " + computer.getMemoryRAM().getTemp() +
                 ", Taktowanie: " + computer.getMemoryRAM().getTiming() + "\n");
-
-        //POWRÓT DO STANU POCZĄTKOWEGO
-
-        computer.getProcesor().overclockDown(200);
-        computer.getMemoryRAM().overclockDown(200);
-
-        //PRÓBA PODKRĘCENIA POWYŻEJ 100 STOPNI
-
-        computer.getProcesor().overclockUp(1000);
-        computer.getMemoryRAM().overclockUp(1500);
-
-
     }
 }

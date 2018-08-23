@@ -41,24 +41,32 @@ public class MemoryRAM extends Part implements Overclocking {
 
     @Override
     public String toString() {
-        return super.toString() + ", Taktowanie(MHz): " + STARTING_TIMING + ", Ilość Pamięci(MB): " + memoryAmount;
+        return super.toString() + ", Taktowanie(MHz): " + STARTING_TIMING + ", Ilość Pamieci(MB): " + memoryAmount;
     }
 
     @Override
     public void overclockUp(int speedUp) throws TemperatureToHigh {
-        timing += speedUp;
-        temp += speedUp / 15;
-        if (temp > 100) {
+
+        double checkTemp = temp;
+        checkTemp += speedUp / 15;
+        if (checkTemp > 100) {
             throw new TemperatureToHigh();
+        }else {
+            timing += speedUp;
+            temp += speedUp / 15;
         }
     }
 
     @Override
     public void overclockDown(int speedDown) throws BelowTheInitialState {
-        timing -= speedDown;
-        temp -= speedDown / 15;
-        if (timing < STARTING_TIMING) {
+
+        double checkTiming = timing;
+        checkTiming -= speedDown;
+        if (checkTiming < STARTING_TIMING) {
             throw new BelowTheInitialState();
+        }else {
+            timing -= speedDown;
+            temp -= speedDown / 15;
         }
 
     }
